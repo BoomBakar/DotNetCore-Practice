@@ -20,4 +20,44 @@ app.MapGet("/games/{id}", (int id) => games.Find(g => g.Id == id) ?? new GameDto
 
 app.MapGet("/users", () => "Welcome to Users Page");
 
+app.MapPost("/games", (CreateGameDto newGame) =>
+{
+    int id = games.Count + 1;
+    games.Add(new GameDto(id, newGame.Title, newGame.Genre, newGame.Price, newGame.ReleaseDate));
+    return Results.Created($"/games/{id}", games[id - 1]);
+});
+
+app.MapPut("/games/{id}", (int id, UpdateGameDto updatedGame) =>
+{
+    var existingGame = games.Find(g => g.Id == id);
+    if (existingGame == null)
+    {
+        return Results.NotFound();
+    }
+
+    var index = games.IndexOf(existingGame);
+    games[index] = new GameDto
+    (
+        id,
+        updatedGame.Title,
+        updatedGame.Genre,
+        updatedGame.Price,
+        updatedGame.ReleaseDate
+    );
+
+    return Results.NoContent();
+});
+
+app.MapDelete("/games/{id}", (int id) =>
+{
+    var existingGame = games.Find(g => g.Id == id);
+    if (existingGame == null)
+    {
+        return Results.NotFound();
+    }
+
+    games.Remove(existingGame);
+    return Results.NoContent();
+});
+
 app.Run();

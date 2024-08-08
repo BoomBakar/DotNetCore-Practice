@@ -10,3 +10,27 @@ GET http://localhost:5244/games
 
 ### get a game by id
 GET http://localhost:5244/games/1
+
+### add a game
+POST http://localhost:5244/games
+Content-Type: application/json
+
+{
+    "title": "League of Legends",
+    "genre": "MOBA",
+    "price": 9.99,
+    "releaseDate": "2020-04-02"
+}
+
+### update a game
+PUT http://localhost:5244/games/2
+Content-Type: application/json
+
+{
+    "title": "Rocket League",
+    "genre": "Sports",
+    "price": 5.99
+}
+
+### delete a game
+DELETE http://localhost:5244/games/5
