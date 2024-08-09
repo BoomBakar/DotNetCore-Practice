@@ -9,7 +9,7 @@ GET http://localhost:5244/users
 GET http://localhost:5244/games
 
 ### get a game by id
-GET http://localhost:5244/games/1
+GET http://localhost:5244/games/6
 
 ### add a game
 POST http://localhost:5244/games
@@ -23,13 +23,11 @@ Content-Type: application/json
 }
 
 ### update a game
-PUT http://localhost:5244/games/2
+PUT http://localhost:5244/games/1
 Content-Type: application/json
 
 {
-    "title": "Rocket League",
-    "genre": "Sports",
-    "price": 5.99
+    "price": 18.99
 }
 
 ### delete a game
